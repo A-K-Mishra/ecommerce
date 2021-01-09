@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html >
+    <head>
+        <title>Welcome To Bazzario !!</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'products/main.css' %}"><!--here static keyword generates an absolute path to all static files and add remaining path supplied as strings-->
+        <link rel="stylesheet" type="text/css" href="{% static 'products/main1.css' %}"><!--here static keyword generates an absolute path to all static files and add remaining path supplied as strings-->
+        <link rel="stylesheet" type="text/css" href="{% static 'products/search_bar.css' %}">
+        <style>
+            body {
+                background: linear-gradient(to right, #1f80b8, #db3012 ,  #9c1660 );
+                min-height: 100vh
+            }
+            #do-inline{
+                display: inline;
+            }
+            .text-gray {
+                color: #aaa
+            }
+
+           
+        </style>
+    </head>
+
+    <body >
+        {% if user.is_authenticated %}
+            <h1 class=''>Hola {{user.username}}!! Welcome back to Bazzario !</h1>
+        {% else %}
+            <h1>Hola Mi Amigo!! Welcome  to Bazzario !</h1>
+        {% endif %}
+        <header class="site-header justify-content-between">
+            <nav class="navbar navbar-expand ">
+                <a class='btn col-sm-6 align-items-left ' href="/">Homepage</a>
+                {% if user.is_authenticated %}
+                    <div class="container" >
+                       
+                            <a class='12 btn ' href="{% url 'profile'%}">Profile</a>
+                            <a class='13 btn cart-icon' id= "cart-icon" href="{% url 'cart-detail' %}">Cart</a>
+                            <a class='14 btn '  href="{% url 'user-order' user.username %}">Past Orders</a> 
+                            <a class='15 btn ' href="{% url 'user-products' user.username %}">Your Goods</a> 
+                            <a class='16 btn ' href="{% url 'product-create' %}">Sell</a>  
+                            <a class='17 btn ' href="{% url 'logout'%}">Logout</a>
+                        
+                    </div>
+                {% else %}
+                    <div class="container"  >
+                        <a class = 'btn nav-item nav-link' href="{% url 'login' %}">Login</a>
+                    </div>
+                {% endif %}
+            </nav>
+        </header>
+        {% block content%}{%endblock%}
+        
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src ="{% static 'products/select.js'%}"> </script>
+    </body>
+</html>

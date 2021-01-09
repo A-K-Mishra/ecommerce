@@ -1,0 +1,34 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        <h1 align='center'> Products Listed by  {{view.kwargs.username}} ({{ products.count }})</h1>
+        <hr>
+        <h4><em>Your Goods: </em></h4>
+        
+        {% for product in products %}
+        <div >
+        
+            <fieldset>
+                <legend>
+                <h4>{{product.name}}</h4>
+                </legend>
+                <div> <em> Product Details : </em></div>
+                    <img src = "{{ product.image.url }}">
+                    <h3>{{ product.name}}</h3>
+                    <strong>Seller :</strong> <em>{{ product.seller }}</em>
+                    <div><strong>Description :</strong> <em> {{ product.description }}</em></div>
+                    <strong>Price :</strong> <em>{{product.price}}</em>
+                    <div><strong>Quantity :</strong> <em> {{ product.quantity_in_stock }}</em></div>
+                    
+                    <br>
+                    <hr>
+        
+                <a href="#"> Delete this product </a> <a href="{% url 'product-update' product.id %}"> Update the product details</a>
+            
+            
+            </fieldset> 
+        </div>
+        
+        {% endfor %}
+ {%endblock%}

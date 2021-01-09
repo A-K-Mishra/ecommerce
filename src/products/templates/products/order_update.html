@@ -1,0 +1,28 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+       
+        <h2>Add To the Order</h2>
+        
+        
+        {% for product in products %}
+            <div align="center">
+                <h3>{{ product.name}}</h3>
+                <strong>Seller :</strong> <em>{{product.seller}}</em>
+                <div><strong>Description :</strong> <em> {{ product.description }}</em></div>
+                <strong>Price :</strong> <em>{{product.price}}</em>
+                <br>
+               
+                <form method="POST" name = "{{ product.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{product.id}}">
+                    {{form | crispy }}
+                    <button type="submit">Add to Present Order</button>
+                </form>
+                <hr>
+            </div>
+        
+        {% endfor %}
+      
+ {%endblock%}

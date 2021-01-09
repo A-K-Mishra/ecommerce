@@ -1,0 +1,27 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        {% if user.is_authenticated %}
+        <form method = "POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <fieldset>
+                <legend>
+                    <h2>Provide Details of the Item to be Sold</h2>
+                </legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div >
+                <hr>
+               
+                <hr>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Upload</button>
+            </div>
+        </form>
+        {% else %}
+        <h3><em>Please Login First </em></h3>
+        <div><a href = "{% url 'login' %}">Log in</a></div> 
+        {% endif %}       
+ {%endblock%}

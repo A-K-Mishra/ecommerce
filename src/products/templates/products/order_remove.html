@@ -1,0 +1,20 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+        <h2> {{ user.username }} , Please enter the new Quantity of {{products.product.name}} </h2>
+        
+            <form method="POST">
+            {% csrf_token %}
+            {{form | crispy }}
+            <div > Please enter 0 to remove this product from list of orders</div>
+            <button type="submit">Update</button>
+            </form>
+            <hr>
+            </div>
+            
+        
+       
+      
+ {%endblock%}

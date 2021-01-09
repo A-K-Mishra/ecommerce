@@ -1,0 +1,41 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+                {% if not user.is_authenticated%}
+                    <h4> Please Log in to Order </h4>
+                    <a href="{% url 'login'%} ">Log in</a>
+                {% else %}
+                    
+                    <h1>Hola {{ user.username }} !! Enter the quantities !</h1>
+                    <div align ='right'>
+                        <a href="{% url 'logout'%}">Logout</a>
+                    </div>
+                    <div align = 'left'>
+                        <a href="{% url 'profile'%}">Profile</a> <a href="{% url 'user-order' user.username %}">Orders</a> <a href="{% url 'product-create' %}">Sell</a>  
+                    </div> 
+                {% endif %}
+                {% for product in products %}
+                    <div align="center">
+                        <h3>{{ product.name}}</h3>
+                        <strong>Seller :</strong> <em>{{product.seller}}</em>
+                        <div><strong>Description :</strong> <em> {{ product.description }}</em></div>
+                        <strong>Price :</strong> <em>{{product.price}}</em>
+                        <br>
+                        <form method = "POST"  >
+                            {% csrf_token %}
+                                    
+                                    {{ form|crispy }}
+                            </fieldset>
+                    
+                            <div class="form-group">
+                                <button class="btn btn-outline-info" type="submit">Order</button>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+
+                {% endfor %}
+    
+
+        
+ {%endblock%}

@@ -1,0 +1,38 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        
+        <h4 class =""><em>Your Cart Items : </em></h4>
+        <div class="cart-row">
+            <div class="col-lg-8 mx-auto">
+                <!-- List group-->
+                
+                <ul class="list-group shadow">
+                    <li class='list-group-item'>
+                        <div class=" navbar-dark mr-auto"><a class=" nav-link btn" href="{% url 'products-home' %}">Continue Shopping</a></div>
+                    </li>
+                    {% for product in cart.items.all %}
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">{{product.product.name}}</h5>
+                                <p class="font-italic text-muted mb-0 small">{{product.product.description}}</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">₹{{product.product.price}}</h6>
+                                    <p class="font-italic text-muted mb-0 small">Seller : {{product.product.seller}}</p>
+                                </div>
+                                <h6 class="font-weight-bold my-2">Quantity : {{product.value}}</h6>
+                            </div><img src="{{ product.product.image.url }}" alt="{{product.product.name}}" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                       <!-- <div class="align-items-lg-center flex-column flex-lg-row p-3"><a href="#">Update Quantity</a></div>-->
+                    </li> <!-- End -->
+                    {% endfor %}
+                    <li class='list-group-item'>
+                    <div class=" navbar-dark mr-auto"><a class=" nav-link btn" href="{%url 'place-order' cart.id%}">Place  Order</a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+ {%endblock%}
